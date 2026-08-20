@@ -1,7 +1,8 @@
-"use client";
-import React, { useState } from "react";
-import { Card, CardHeader, CardFooter, Image, Chip } from "@heroui/react";
-import { GoDotFill } from "react-icons/go";
+"use client"
+
+import React, { useState } from "react"
+import { Card, CardHeader, CardFooter, Image, Chip } from "@heroui/react"
+import { GoDotFill } from "react-icons/go"
 
 const CoreValuesCard = () => {
   const CoreValues = [
@@ -13,7 +14,6 @@ const CoreValuesCard = () => {
       description:
         "With unity in purpose and mutual trust and respect for each other, we work toward shared aspirations and transcend boundaries along functional and organizational lines.",
     },
-
     {
       key: 2,
       title: "Customer Orientation",
@@ -22,7 +22,6 @@ const CoreValuesCard = () => {
       description:
         "Our goal is to delight and please our customers. Thus, all activities and programs we undertake result in innovative projects and in the enhancement of productivity and quality.",
     },
-
     {
       key: 3,
       title: "Excellence",
@@ -39,28 +38,37 @@ const CoreValuesCard = () => {
       description:
         "All our actions are guided by what is ethical, fair, and right. Believing in profit with honor, we are committed to good governance and the highest moral standards.",
     },
-  ];
+  ]
 
-  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({})
 
   const toggleExpand = (key: number) => {
     setExpanded((prev) => ({
       ...prev,
       [key]: !prev[key],
-    }));
-  };
+    }))
+  }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 md:flex gap-4 py-6">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6">
       {CoreValues.map((item) => (
         <Card
           key={item.key}
           isFooterBlurred
-          className="w-full h-[300px] col-span-12 sm:col-span-7"
+          className="w-full h-[300px] col-span-1"
         >
+          {/* Title */}
           <CardHeader className="absolute z-10 top-1 flex-col items-start">
-            <Chip startContent={<GoDotFill />} variant="flat" color="primary" className="uppercase font-bold">{item.title}</Chip>
+            <Chip
+              startContent={<GoDotFill />}
+              variant="flat"
+              className="uppercase font-bold bg-[#FFFFFF] text-[#9B0D15]"
+            >
+              {item.title}
+            </Chip>
           </CardHeader>
+
+          {/* Image */}
           <Image
             isZoomed
             removeWrapper
@@ -68,19 +76,23 @@ const CoreValuesCard = () => {
             className="z-0 w-full h-full object-cover"
             src={item.image}
           />
-          <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
+
+          {/* Description */}
+          <CardFooter className="absolute bg-[#373A36]/80 bottom-0 z-10 border-t border-[#FFFFFF]/30">
             <div className="flex flex-grow gap-2 items-center">
               <div className="flex flex-col">
-                <p className="text-sm text-white/80 inline">
+                <p className="text-sm text-[#FFFFFF]/90 inline">
                   {expanded[item.key]
                     ? item.description
                     : `${item.description.slice(0, 50)}...`}
-                  <span
+
+                  <button
+                    type="button"
                     onClick={() => toggleExpand(item.key)}
-                    className="ml-2 text-green-400 cursor-pointer hover:text-green-200"
+                    className="ml-2 text-[#FFFFFF] font-semibold cursor-pointer hover:text-[#9B0D15] transition-colors"
                   >
-                    {expanded[item.key] ? " See less" : " See more..."}
-                  </span>
+                    {expanded[item.key] ? "See less" : "See more..."}
+                  </button>
                 </p>
               </div>
             </div>
@@ -88,7 +100,7 @@ const CoreValuesCard = () => {
         </Card>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default CoreValuesCard;
+export default CoreValuesCard

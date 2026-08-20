@@ -1,5 +1,6 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+
+import React, { useState } from "react"
 import {
   Select,
   SelectItem,
@@ -9,17 +10,18 @@ import {
   Slider,
   Button,
   Divider,
-} from "@heroui/react";
-import { useRouter } from "next/navigation";
+} from "@heroui/react"
+import { useRouter } from "next/navigation"
 
 const FilterPropertyModal = () => {
-  const [loading, setLoading] = useState(false);
-  const [location, setLocation] = useState("");
-  const [types, setTypes] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false)
+  const [location, setLocation] = useState("")
+  const [types, setTypes] = useState<string | null>(null)
   const [priceRange, setPriceRange] = useState<[number, number]>([
     1000000, 50000000,
-  ]);
-  const router = useRouter();
+  ])
+
+  const router = useRouter()
 
   const options = [
     "Studio",
@@ -39,36 +41,60 @@ const FilterPropertyModal = () => {
     "Tandem Unit w/ Tandem Parking",
     "1 Parking Slot",
     "Tandem Parking",
-  ];
+  ]
 
   const handleSearch = () => {
-    setLoading(true);
+    setLoading(true)
+
     const query = {
       location: location.trim(),
       types: types || "",
       min_price: priceRange[0].toString(),
       max_price: priceRange[1].toString(),
-    };
-    const queryString = new URLSearchParams(query).toString();
-    setLoading(false);
-    router.push(`/property-finder?${queryString}`);
-  };
+    }
+
+    const queryString = new URLSearchParams(query).toString()
+
+    setLoading(false)
+
+    router.push(`/property-finder?${queryString}`)
+  }
 
   return (
-    <Card className="w-full mx-auto bg-white/30 backdrop-blur-lg shadow-lg rounded-xl border border-white/40 p-4">
+    <Card
+      className="
+        mx-auto
+        w-full
+        rounded-xl
+        border
+        border-[#FFFFFF]/40
+        bg-[#373A36]/80
+        p-4
+        shadow-lg
+        backdrop-blur-lg
+      "
+    >
       <CardBody>
         <div className="flex flex-col">
           {/* Title */}
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className="text-lg font-semibold text-[#FFFFFF]">
             What are you looking for?
           </h2>
-          <Divider className="my-4" />
+
+          <Divider className="my-4 bg-[#FFFFFF]/30" />
 
           <form
-            className="flex flex-col md:flex-row items-center gap-4 w-full"
+            className="
+              flex
+              w-full
+              flex-col
+              items-center
+              gap-4
+              md:flex-row
+            "
             onSubmit={(e) => {
-              e.preventDefault();
-              handleSearch();
+              e.preventDefault()
+              handleSearch()
             }}
           >
             {/* Location Input */}
@@ -79,6 +105,16 @@ const FilterPropertyModal = () => {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              classNames={{
+                label: "text-[#FFFFFF]",
+                input: "text-[#FFFFFF]",
+                inputWrapper: `
+                  bg-[#FFFFFF]
+                  border-[#FFFFFF]
+                  hover:border-[#9B0D15]
+                  focus-within:border-[#9B0D15]
+                `,
+              }}
             />
 
             {/* Unit Type Select */}
@@ -86,8 +122,18 @@ const FilterPropertyModal = () => {
               className="inline-flex w-full"
               size="lg"
               label="Select Unit/PS Type"
-              value={types || ""}
+              selectedKeys={types ? [types] : []}
               onChange={(e) => setTypes(e.target.value)}
+              classNames={{
+                label: "text-[#FFFFFF]",
+                value: "text-[#373A36]",
+                trigger: `
+                  bg-[#FFFFFF]
+                  border-[#FFFFFF]
+                  hover:border-[#9B0D15]
+                  data-[focus=true]:border-[#9B0D15]
+                `,
+              }}
             >
               {options.map((option) => (
                 <SelectItem key={option}>{option}</SelectItem>
@@ -95,26 +141,49 @@ const FilterPropertyModal = () => {
             </Select>
 
             {/* Price Range Slider */}
-            <div className="flex flex-col w-full">
+            <div className="flex w-full flex-col">
               <Slider
-                className="w-full inline-flex text-white"
-                formatOptions={{ style: "currency", currency: "PHP" }}
+                className="inline-flex w-full"
+                formatOptions={{
+                  style: "currency",
+                  currency: "PHP",
+                }}
                 label="Price Range"
                 maxValue={50000000}
                 minValue={1000000}
                 step={100000}
                 value={priceRange}
                 onChange={(value) => setPriceRange(value as [number, number])}
+                classNames={{
+                  label: "text-[#FFFFFF]",
+                  value: "text-[#FFFFFF]",
+                  filler: "bg-[#9B0D15]",
+                  track: "bg-[#FFFFFF]/40",
+                  thumb: "bg-[#FFFFFF] border-[#9B0D15]",
+                }}
               />
             </div>
 
             {/* Search Button */}
             <Button
               isLoading={loading}
-              color="primary"
               size="lg"
               type="submit"
-              className="inline-flex w-full max-w-sm"
+              className="
+                inline-flex
+                w-full
+                max-w-sm
+                bg-[#9B0D15]
+                font-semibold
+                text-[#FFFFFF]
+                shadow-md
+                transition-all
+                duration-200
+                hover:bg-[#9B0D15]/90
+              "
+              spinner={
+                <span className="border-[#FFFFFF] border-t-transparent" />
+              }
             >
               Search Property
             </Button>
@@ -122,7 +191,7 @@ const FilterPropertyModal = () => {
         </div>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default FilterPropertyModal;
+export default FilterPropertyModal

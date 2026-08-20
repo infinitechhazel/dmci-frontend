@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body className={`bg-background antialiased ${poppins.className}`}>
+      <body className={`antialiased ${poppins.className}`}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="flex flex-col min-h-screen">
             <Navbar />

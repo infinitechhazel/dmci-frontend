@@ -1,160 +1,244 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // Import Next.js router
-import { Button, Image, Spinner } from "@heroui/react";
-import FilterPropertyModal from "@/components/modal/fileterproperty";
-import { getAuthHeaders } from "../auth";
-import { MdArrowOutward } from "react-icons/md";
-import { toSlug } from "@/utils/slug";
-import { breeSerif, raleway } from "@/utils/font";
+"use client"
+
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { Button, Image, Spinner } from "@heroui/react"
+import FilterPropertyModal from "@/components/modal/fileterproperty"
+import { getAuthHeaders } from "../auth"
+import { MdArrowOutward } from "react-icons/md"
+import { toSlug } from "@/utils/slug"
+import { raleway } from "@/utils/font"
 
 const HeroSection = () => {
-  const [property, setProperty] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [buttonLoading, setButtonLoading] = useState(false);
-  const router = useRouter();
+  const [property, setProperty] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [buttonLoading, setButtonLoading] = useState(false)
+
+  const router = useRouter()
 
   useEffect(() => {
     const fetchProperty = async () => {
-      const headers = getAuthHeaders();
+      const headers = getAuthHeaders()
 
       try {
         const response = await fetch(
-          "${process.env.NEXT_PUBLIC_API_URL}/api/user/featured-property",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/user/featured-property`,
           {
             method: "GET",
-            headers: headers,
-          }
-        );
-        const data = await response.json();
-        setProperty(data.record);
-      } catch (error) {
-        console.error("Error fetching featured property:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+            headers,
+          },
+        )
 
-    fetchProperty();
-  }, []);
+        const data = await response.json()
+        setProperty(data.record)
+      } catch (error) {
+        console.error("Error fetching featured property:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProperty()
+  }, [])
 
   if (loading) {
     return (
-      <section className="flex items-center justify-center w-full min-h-screen bg-gray-100 py-12">
-        <Spinner size="lg" color="primary" label="Loading Section..." />
+      <section className="flex min-h-screen w-full items-center justify-center bg-[#373A36] py-12">
+        <Spinner
+          size="lg"
+          label="Loading Section..."
+          color="danger"
+          classNames={{
+            label: "text-[#FFFFFF]",
+          }}
+        />
       </section>
-    );
+    )
   }
 
   if (!property) {
     return (
-      <section className="flex items-center justify-center w-full min-h-screen bg-gray-100">
+      <section className="flex min-h-screen w-full items-center justify-center bg-[#FFFFFF] text-[#373A36]">
         <p>Failed to load featured property.</p>
       </section>
-    );
-  }
-
-  let backgroundImage = "";
-
-  try {
-    const images: string[] = JSON.parse(property.images);
-    if (Array.isArray(images) && images.length > 0) {
-      backgroundImage = `${process.env.NEXT_PUBLIC_API_URL}/properties/images/${images[0]}`;
-    }
-  } catch (error) {
-    console.error("Error parsing images:", error);
+    )
   }
 
   return (
     <section
-      className="relative w-full h-auto bg-cover object-cover bg-right-top bg-no-repeat"
-      style={{ backgroundImage: `url('/hero-banner.png')` }}
+      className="
+        relative
+        h-auto
+        w-full
+        bg-[#373A36]
+        bg-cover
+        bg-right-top
+        bg-no-repeat
+      "
+      style={{
+        backgroundImage: "url('/hero-banner.png')",
+      }}
     >
-      {/* Overlay */}
-      {/* <div className="absolute inset-0 bg-black/60 z-20 pointer-events-none"></div> */}
-      <div className="absolute py-12 w-full opacity-20 z-20 bg-contain bg-center xl:bg-left bg-no-repeat inset-0 xl:left-24 top-12">
-        {/* Mobile Logo - image with combined text */}
-        <div className="sm:hidden flex justify-center mt-[-60px]">
+      {/* Gray Overlay */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[#373A36]/55" />
 
+      {/* Brand / Logo */}
+      <div
+        className="
+          absolute
+          inset-0
+          top-12
+          z-20
+          w-full
+          bg-contain
+          bg-center
+          bg-no-repeat
+          py-12
+          opacity-20
+          xl:left-24
+          xl:bg-left
+        "
+      >
+        {/* Mobile Logo */}
+        <div className="mt-[-60px] flex justify-center sm:hidden">
           <Image
-            src="/dmci-logo-hero.png" // your new logo with text
+            src="/dmci-logo-hero.png"
             alt="DMCI Logo Mobile"
             width={210}
             height={68}
-            className="object-contain mt-[-17px] ml-[-60px]"
-     
-          />  <div className="[@media(max-width:344px)]:text-2xl text-5xl sm:text-7xl md:text-7xl  lg:text-8xl xl:text-[200px] font-bold underline ml-[-100px]">
-          DMCI HOMES
-        </div>
+            className="ml-[-60px] mt-[-17px] object-contain"
+          />
+
+          <div
+            className="
+              ml-[-100px]
+              text-5xl
+              font-bold
+              text-[#FFFFFF]
+              underline
+              sm:text-7xl
+              md:text-7xl
+              lg:text-8xl
+              xl:text-[200px]
+              [@media(max-width:344px)]:text-2xl
+            "
+          >
+            DMCI HOMES
+          </div>
         </div>
 
-        {/* Tablet/Desktop Layout: Logo and text side-by-side */}
-        <div className="hidden sm:flex flex-row items-center gap-4">
+        {/* Tablet / Desktop Logo */}
+        <div className="hidden flex-row items-center gap-4 sm:flex">
           <Image src="/dmci-logo-hero.png" alt="DMCI Logo" height={350} />
-          <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[200px] font-bold underline">
+
+          <div
+            className="
+              text-4xl
+              font-bold
+              text-[#FFFFFF]
+              underline
+              sm:text-6xl
+              md:text-7xl
+              lg:text-8xl
+              xl:text-[200px]
+            "
+          >
             DMCI HOMES
           </div>
         </div>
       </div>
 
-      {/* Mobile Ma'am Ela image behind everything */}
+      {/* Mobile Ma'am Ela */}
       <div
-  className="absolute xl:hidden z-20 right-[-25px] top-[220px] 
-             [@media(min-width:640px)_and_(max-width:770px)]:top-[250px] 
-             [@media(min-width:320px)_and_(max-width:385px)]:top-[230px] 
-             [@media(min-width:1085px)_and_(max-width:1273px)]:top-[100px]"
->
-      <Image
-    src="/ella-profile.png"
-    alt="Ella Profile Mobile"
-
-    className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] object-contain"
-  />
+        className="
+          absolute
+          right-[-25px]
+          top-[220px]
+          z-20
+          xl:hidden
+          [@media(min-width:320px)_and_(max-width:385px)]:top-[230px]
+          [@media(min-width:640px)_and_(max-width:770px)]:top-[250px]
+          [@media(min-width:1085px)_and_(max-width:1273px)]:top-[100px]
+        "
+      >
+        <Image
+          src="/ella-profile.png"
+          alt="Ella Profile Mobile"
+          className="
+            h-[250px]
+            w-[250px]
+            object-contain
+            md:h-[300px]
+            md:w-[300px]
+          "
+        />
       </div>
 
-      {/* Content */}
-      <div className="relative z-20 flex flex-col text-white px-4 xl:px-24 ">
+      {/* Main Content */}
+      <div className="relative z-20 flex flex-col px-4 text-[#FFFFFF] xl:px-24">
         <div className="grid grid-cols-1 xl:grid-cols-2">
-          <div className="relative py-24 w-full h-auto bg-contain bg-left bg-no-repeat">
-            <div className="flex flex-col w-full text-center xl:text-start xl:max-w-3xl z-40">
+          {/* Content */}
+          <div className="relative h-auto w-full bg-contain bg-left bg-no-repeat py-24">
+            <div className="z-40 flex w-full max-w-3xl flex-col text-center xl:text-start">
               <h1>
                 <span
-                  className={`text-5xl sm:text-7xl font-bold capitalize  ${raleway.className} `}
+                  className={`
+                    text-5xl
+                    font-bold
+                    capitalize
+                    text-[#FFFFFF]
+                    sm:text-7xl
+                    ${raleway.className}
+                  `}
                 >
-                  {property?.property.slogan || ""}&nbsp;
+                  {property?.property?.slogan || ""}
                 </span>
               </h1>
-              <p className="mt-4 text-gray-200 text-lg xl:text-xl line-clamp-5">
+
+              <p className="mt-4 line-clamp-5 text-lg text-[#FFFFFF]/90 xl:text-xl">
                 {property?.property_description}
               </p>
             </div>
 
-            <div className="flex gap-3 mt-8 z-50 justify-center xl:justify-start">
+            {/* CTA */}
+            <div className="z-50 mt-8 flex justify-center gap-3 xl:justify-start">
               <Button
                 size="lg"
                 endContent={<MdArrowOutward />}
                 isLoading={buttonLoading}
-                color="primary"
                 variant="solid"
+                className="
+                  bg-[#9B0D15]
+                  font-semibold
+                  text-[#FFFFFF]
+                  shadow-lg
+                  transition-all
+                  duration-200
+                  hover:scale-105
+                  hover:bg-[#9B0D15]/90
+                "
                 onPress={() => {
-                  setButtonLoading(true);
+                  setButtonLoading(true)
+
                   router.push(
-                    `${toSlug(property.property.name)}/${toSlug(property.id)}/${toSlug(
-                      property.property_description || ""
-                    )}`
-                  );
+                    `${toSlug(property.property.name)}/${toSlug(
+                      property.id,
+                    )}/${toSlug(property.property_description || "")}`,
+                  )
                 }}
               >
-                Visit {property?.property.name || "Property"}
+                Visit {property?.property?.name || "Property"}
               </Button>
             </div>
 
-            <div className="flex xl:hidden w-full justify-center z-50 py-4">
+            {/* Mobile Filter */}
+            <div className="z-50 flex w-full justify-center py-4 xl:hidden">
               <FilterPropertyModal />
             </div>
           </div>
 
-          <div className=" hidden xl:flex justify-center">
+          {/* Desktop Ela Image */}
+          <div className="hidden justify-center xl:flex">
             <Image
               src="/ella-profile.png"
               width={600}
@@ -166,12 +250,15 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Filter Property Modal at the Bottom with Full Width */}
-      <div className="hidden absolute xl:bottom-0 left-0 w-full mb-4 px-4 xl:px-24 xl:flex justify-center z-20">
+      {/* Desktop Filter */}
+      <div className="absolute bottom-0 left-0 z-20 mb-4 hidden w-full justify-center px-4 xl:flex xl:px-24">
         <FilterPropertyModal />
       </div>
-    </section>
-  );
-};
 
-export default HeroSection;
+      {/* Red Bottom Accent */}
+      <div className="absolute bottom-0 left-0 z-30 h-2 w-full bg-[#9B0D15]" />
+    </section>
+  )
+}
+
+export default HeroSection

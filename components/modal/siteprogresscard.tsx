@@ -1,52 +1,67 @@
-"use client";
-import React, { useState } from "react";
-import { Card, CardFooter, CardHeader, Image } from "@heroui/react";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
-import { formatNumber } from "@/utils/formatNumber";
+"use client"
+
+import React, { useState } from "react"
+import { Card, CardFooter, CardHeader, Image } from "@heroui/react"
+import "keen-slider/keen-slider.min.css"
+import { useKeenSlider } from "keen-slider/react"
+import { formatNumber } from "@/utils/formatNumber"
 
 interface Property {
-  name: string;
-  property_location: string;
-  status: string;
-  min_price: number;
-  max_price: number;
-  percent: number;
-  images: string;
+  name: string
+  property_location: string
+  status: string
+  min_price: number
+  max_price: number
+  percent: number
+  images: string
 }
 
 interface SiteProgressProps {
-  data: Property[];
+  data: Property[]
 }
 
 const PropertyLocation: React.FC<{ location: string }> = ({ location }) => {
-  const [expanded, setExpanded] = useState(false);
-  const maxLength = 50;
+  const [expanded, setExpanded] = useState(false)
+  const maxLength = 50
 
-  const isLong = location?.length > maxLength;
+  const isLong = location?.length > maxLength
+
   const displayText =
-    !expanded && isLong ? location.slice(0, maxLength) + "..." : location;
+    !expanded && isLong ? `${location.slice(0, maxLength)}...` : location
 
   return (
-    <p className="text-white text-tiny">
+    <p className="text-[10px] text-[#FFFFFF] sm:text-xs">
       {displayText || "No Location Provided"}
+
       {isLong && (
         <button
+          type="button"
           onClick={() => setExpanded(!expanded)}
-          className="ml-1 underline text-blue-300"
+          className="
+            ml-1
+            cursor-pointer
+            text-[#FFFFFF]
+            underline
+            underline-offset-2
+            transition-opacity
+            hover:opacity-70
+          "
         >
           {expanded ? "See less" : "See more"}
         </button>
       )}
     </p>
-  );
-};
+  )
+}
 
 const SiteProgressCard: React.FC<SiteProgressProps> = ({ data }) => {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
     breakpoints: {
       "(max-width: 400px)": {
+        slides: { perView: 1, spacing: 15 },
+      },
+      "(min-width: 401px) and (max-width: 600px)": {
         slides: { perView: 1, spacing: 15 },
       },
       "(min-width: 601px) and (max-width: 999px)": {
@@ -56,89 +71,261 @@ const SiteProgressCard: React.FC<SiteProgressProps> = ({ data }) => {
         slides: { perView: 5, spacing: 15 },
       },
     },
-  });
+  })
 
-  const handlePrev = () => slider.current?.prev();
-  const handleNext = () => slider.current?.next();
+  const handlePrev = () => {
+    slider.current?.prev()
+  }
+
+  const handleNext = () => {
+    slider.current?.next()
+  }
 
   return (
-    <div className="relative py-8">
+    <div className="relative w-full py-6 sm:py-8">
       <div ref={sliderRef} className="keen-slider">
         {data.map((property, index) => {
-          let imageUrl = "";
+          let imageUrl = ""
+
           try {
-            const images: string[] = JSON.parse(property.images || "[]");
+            const images: string[] = JSON.parse(property.images || "[]")
+
             if (Array.isArray(images) && images.length > 0) {
-              imageUrl = `${process.env.NEXT_PUBLIC_API_URL}/properties/images/${images[0]}`;
+              imageUrl = `${process.env.NEXT_PUBLIC_API_URL}/properties/images/${images[0]}`
             }
           } catch (error) {
-            console.error("Error parsing images:", error);
+            console.error("Error parsing images:", error)
           }
 
           return (
             <div key={index} className="keen-slider__slide">
-              <Card isFooterBlurred className="w-full h-[400px] relative">
-                <CardHeader className="absolute z-10 top-1 flex-col items-start">
+              <Card
+                isFooterBlurred
+                className="
+                  relative
+                  h-[320px]
+                  w-full
+                  overflow-hidden
+                  border
+                  border-[#373A36]/20
+                  bg-[#373A36]
+                  sm:h-[350px]
+                  md:h-[380px]
+                  lg:h-[400px]
+                "
+              >
+                {/* Status */}
+                <CardHeader className="absolute left-0 top-0 z-20 flex-col items-start p-3 sm:p-4">
                   {property.status && (
                     <div
-                      className={`text-tiny uppercase font-semibold px-2 py-1 rounded-md mb-2 inline-flex items-center gap-1 ${
-                        property.status === "Ready For Occupancy"
-                          ? "bg-green-100 text-green-800"
-                          : property.status === "Under Construction"
-                            ? "bg-red-100 text-red-800"
-                            : property.status === "New"
-                              ? "bg-yellow-100 text-yellow-700"
-                              : "bg-gray-100 text-gray-600"
-                      }`}
+                      className="
+                        rounded-md
+                        border
+                        border-[#FFFFFF]/30
+                        bg-[#373A36]/90
+                        px-2
+                        py-1
+                        text-[9px]
+                        font-semibold
+                        uppercase
+                        tracking-wide
+                        text-[#FFFFFF]
+                        backdrop-blur-sm
+                        sm:text-[10px]
+                        md:text-xs
+                      "
                     >
                       {property.status}
                     </div>
                   )}
                 </CardHeader>
-                <Image
-                  removeWrapper
-                  alt="DMCI Property"
-                  className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-                  src={imageUrl}
+
+                {/* Property Image */}
+                {imageUrl ? (
+                  <Image
+                    removeWrapper
+                    alt={property.name || "DMCI Property"}
+                    className="
+                      z-0
+                      h-full
+                      w-full
+                      -translate-y-3
+                      scale-125
+                      object-cover
+                      sm:-translate-y-4
+                    "
+                    src={imageUrl}
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-[#373A36]" />
+                )}
+
+                {/* Progress Overlay */}
+                <div
+                  className="
+                    absolute
+                    bottom-0
+                    left-0
+                    z-10
+                    w-full
+                    bg-[#9B0D15]/60
+                    transition-all
+                    duration-500
+                  "
+                  style={{
+                    height: `${Math.min(
+                      Math.max(property.percent || 0, 0),
+                      100,
+                    )}%`,
+                  }}
                 />
-                <CardFooter className="absolute bg-white/20 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between h-[80px] px-4">
-                  <div className="overflow-hidden">
-                    <p className="text-white font-bold text-md truncate">
-                      {property.name}
+
+                {/* Percentage */}
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    z-20
+                    flex
+                    items-center
+                    justify-center
+                    px-4
+                    text-center
+                    text-xl
+                    font-bold
+                    text-[#FFFFFF]
+                    drop-shadow-lg
+                    sm:text-2xl
+                    md:text-3xl
+                  "
+                >
+                  {formatNumber(property.percent) || "0.00"}%
+                </div>
+
+                {/* Footer */}
+                <CardFooter
+                  className="
+                    absolute
+                    bottom-0
+                    z-30
+                    h-[72px]
+                    w-full
+                    justify-between
+                    border-t
+                    border-[#FFFFFF]/30
+                    bg-[#373A36]/75
+                    px-3
+                    backdrop-blur-sm
+                    sm:h-[80px]
+                    sm:px-4
+                  "
+                >
+                  <div className="min-w-0 overflow-hidden">
+                    <p
+                      className="
+                        truncate
+                        text-sm
+                        font-bold
+                        text-[#FFFFFF]
+                        sm:text-base
+                        md:text-md
+                      "
+                    >
+                      {property.name || "No Property Name"}
                     </p>
+
                     <PropertyLocation location={property.property_location} />
                   </div>
                 </CardFooter>
-                <div
-                  className="flex flex-col items-center justify-center bg-green-500 absolute bottom-0 z-9 w-full opacity-50"
-                  style={{ height: `${property.percent || 0}%` }}
-                />
-                <div className="absolute bottom-0 top-0 z-9 h-full w-full flex items-center justify-center text-center text-white font-bold text-2xl">
-                  {formatNumber(property.percent) || "0.00"}%
-                </div>
               </Card>
             </div>
-          );
+          )
         })}
       </div>
 
       {/* Navigation Buttons */}
-      <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-4 z-[999999]">
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-0
+          top-1/2
+          z-40
+          flex
+          w-full
+          -translate-y-1/2
+          items-center
+          justify-between
+          px-2
+          sm:px-4
+        "
+      >
         <button
-          className="bg-blue-600 opacity-70 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition hover:opacity-100"
+          type="button"
+          aria-label="Previous property"
+          className="
+            pointer-events-auto
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-full
+            border
+            border-[#FFFFFF]/40
+            bg-[#9B0D15]/90
+            text-xl
+            leading-none
+            text-[#FFFFFF]
+            shadow-lg
+            transition-all
+            duration-200
+            hover:bg-[#9B0D15]
+            hover:scale-105
+            active:scale-95
+            sm:h-10
+            sm:w-10
+            sm:text-2xl
+          "
           onClick={handlePrev}
         >
           &#8249;
         </button>
+
         <button
-          className="bg-blue-600 text-white opacity-70 py-2 px-4 rounded-full hover:bg-blue-700 transition hover:opacity-100 z-[999999]"
+          type="button"
+          aria-label="Next property"
+          className="
+            pointer-events-auto
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-full
+            border
+            border-[#FFFFFF]/40
+            bg-[#9B0D15]/90
+            text-xl
+            leading-none
+            text-[#FFFFFF]
+            shadow-lg
+            transition-all
+            duration-200
+            hover:bg-[#9B0D15]
+            hover:scale-105
+            active:scale-95
+            sm:h-10
+            sm:w-10
+            sm:text-2xl
+          "
           onClick={handleNext}
         >
           &#8250;
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SiteProgressCard;
+export default SiteProgressCard

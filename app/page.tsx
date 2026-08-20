@@ -14,7 +14,7 @@ export default function Home() {
       <div className="flex-grow px-4 xl:px-24">
         <Testimonials />
         <RecommendedForYou />
-        <SiteProgress />
+        {/* <SiteProgress /> */}
         <HomeNews />
         <FrequentlyAskQuestions/>
         <ContactUs />

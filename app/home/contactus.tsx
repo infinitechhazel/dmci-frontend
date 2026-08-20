@@ -1,74 +1,94 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import CompanyInfo from "@/components/companycontactinfo";
-import ContactForm from "@/components/contactform";
-import { getAuthHeaders } from "../auth";
+"use client"
+
+import React, { useEffect, useState } from "react"
+import CompanyInfo from "@/components/companycontactinfo"
+import ContactForm from "@/components/contactform"
+import { getAuthHeaders } from "../auth"
 
 async function fetchProperties() {
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
-  const endpoint = `${apiUrl}/api/user/properties`;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
+  const endpoint = `${apiUrl}/api/user/properties`
 
   try {
-    const headers = getAuthHeaders();
+    const headers = getAuthHeaders()
+
     const res = await fetch(endpoint, {
       method: "GET",
       headers,
       cache: "no-cache",
-    });
+    })
 
     if (!res.ok) {
       console.error(
         `Failed to fetch properties: ${res.status} - ${res.statusText}`,
-      );
+      )
 
-      return [];
+      return []
     }
-    const data = await res.json();
 
-    return data.records;
+    const data = await res.json()
+
+    return data.records
   } catch (error) {
-    console.error("An error occurred while fetching properties:", error);
+    console.error("An error occurred while fetching properties:", error)
 
-    return [];
+    return []
   }
 }
 
 const ContactUs = () => {
-  const [properties, setProperties] = useState<[]>([]);
+  const [properties, setProperties] = useState<[]>([])
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchProperties();
-      setProperties(data);
-    };
+      const data = await fetchProperties()
+      setProperties(data)
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <section className="px-4 py-6 sm:px-6 md:py-8 lg:px-8">
-      <div className="grid grid-cols-1 text-start lg:grid-cols-2 pt-8 gap-8 lg:items-start">
+      <div className="grid grid-cols-1 gap-8 pt-8 text-start lg:grid-cols-2 lg:items-start">
+        {/* Contact Form Section */}
         <div>
           <div className="mb-8">
-            <h1 className="font-bold text-xl sm:text-2xl uppercase">
+            <h1
+              className="
+                text-xl
+                font-bold
+                uppercase
+                text-[#373A36]
+                sm:text-2xl
+              "
+            >
               Contact Us
             </h1>
-            <p className="text-sm text-default-500">
+
+            <p
+              className="
+                text-sm
+                text-[#373A36]/70
+              "
+            >
               Leave us a message and we will get back to you as soon as
               possible.
             </p>
           </div>
+
           <div>
             <ContactForm data={properties} />
           </div>
         </div>
 
+        {/* Company Information */}
         <div className="px-0 lg:px-8">
           <CompanyInfo />
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ContactUs;
+export default ContactUs

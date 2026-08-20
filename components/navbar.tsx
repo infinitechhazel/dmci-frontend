@@ -16,7 +16,7 @@ import NextLink from "next/link"
 import clsx from "clsx"
 import { useState, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import FormUtilities from "./navbar/formsutilities";
+import FormUtilities from "./navbar/formsutilities"
 
 import { siteConfig } from "@/config/site"
 import { ThemeSwitch } from "@/components/theme-switch"
@@ -86,10 +86,14 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      className="bg-blue-800 text-white xl:px-12"
       isMenuOpen={menuOpen}
       maxWidth="full"
       onMenuOpenChange={setMenuOpen}
+      className="xl:px-12"
+      style={{
+        backgroundColor: "#9B0D15",
+        color: "#FFFFFF",
+      }}
     >
       {/* Brand */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -99,7 +103,10 @@ export const Navbar = () => {
             href="/"
           >
             <BrandLogo />
-            <p className="font-bold text-2xl">DMCI HOMES</p>
+
+            <p className="text-2xl font-bold" style={{ color: "#FFFFFF" }}>
+              DMCI HOMES
+            </p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
@@ -107,14 +114,18 @@ export const Navbar = () => {
       {/* Desktop Navigation */}
       <NavbarContent className="hidden xl:flex" justify="center">
         <NavbarItem>
-          <ul className="hidden lg:flex gap-6">
+          <ul className="hidden gap-6 lg:flex">
             {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
                 <NextLink
                   className={clsx(
                     "w-full text-left uppercase",
-                    pathname === item.href ? "text-green-500 font-bold" : "",
+                    pathname === item.href && "font-bold",
                   )}
+                  style={{
+                    color: pathname === item.href ? "#FFFFFF" : "#FFFFFF",
+                    opacity: pathname === item.href ? 1 : 0.85,
+                  }}
                   href={item.href}
                 >
                   {item.label}
@@ -127,7 +138,7 @@ export const Navbar = () => {
 
       {/* Desktop Right Section */}
       <NavbarContent
-        className="hidden xl:flex basis-1/5 sm:basis-full"
+        className="hidden basis-1/5 sm:basis-full xl:flex"
         justify="end"
       >
         <NavbarItem className="flex items-center gap-3">
@@ -137,8 +148,12 @@ export const Navbar = () => {
             <Button
               onPress={handleInstallApp}
               isIconOnly
-              className="bg-green-600 text-white rounded-full p-2 hover:bg-green-700"
               aria-label="Install App"
+              className="rounded-full p-2"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "#9B0D15",
+              }}
             >
               <LuDownload size={20} />
             </Button>
@@ -149,13 +164,22 @@ export const Navbar = () => {
       </NavbarContent>
 
       {/* Mobile Navbar */}
-      <NavbarContent className="xl:hidden basis-1 pl-4" justify="end">
+      <NavbarContent className="basis-1 pl-4 xl:hidden" justify="end">
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        <NavbarMenuToggle
+          style={{
+            color: "#FFFFFF",
+          }}
+        />
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu>
+      <NavbarMenu
+        style={{
+          backgroundColor: "#FFFFFF",
+          color: "#373A36",
+        }}
+      >
         <div className="mt-2 flex flex-col gap-2">
           {/* Main Navigation */}
           {siteConfig.navMenuItems.map((item, index) => (
@@ -164,8 +188,11 @@ export const Navbar = () => {
                 type="button"
                 className={clsx(
                   "w-full text-left",
-                  pathname === item.href ? "text-blue-500 font-bold" : "",
+                  pathname === item.href && "font-bold",
                 )}
+                style={{
+                  color: pathname === item.href ? "#9B0D15" : "#373A36",
+                }}
                 onClick={() => handleLinkClick(item.href)}
               >
                 {item.label}
@@ -173,20 +200,38 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
 
-          <Divider className="my-4" />
+          <Divider
+            className="my-4"
+            style={{
+              backgroundColor: "#373A36",
+              opacity: 0.2,
+            }}
+          />
 
           <div className="space-y-1">
-            <p className="text-small text-default-400">Form & Utilities</p>
+            <p
+              className="text-small"
+              style={{
+                color: "#373A36",
+                opacity: 0.6,
+              }}
+            >
+              Form & Utilities
+            </p>
           </div>
 
           {/* Form & Utilities */}
           {siteConfig.navMenuItemsLinks.map((item, index) => (
             <NavbarMenuItem key={`${item.label}-${index}`}>
-              {/* CRF: display only */}
+              {/* Customer Reservation Form: display only */}
               {item.label === "Customer Reservation Form" ? (
                 <span
-                  className="w-full text-left block cursor-default text-default-500"
+                  className="block w-full cursor-default text-left"
                   aria-disabled="true"
+                  style={{
+                    color: "#373A36",
+                    opacity: 0.5,
+                  }}
                 >
                   {item.label}
                 </span>
@@ -194,20 +239,22 @@ export const Navbar = () => {
                 <a
                   download
                   href={item.href}
-                  className={clsx(
-                    "w-full text-left block",
-                    pathname === item.href ? "text-blue-500 font-bold" : "",
-                  )}
+                  className="block w-full text-left"
+                  style={{
+                    color: pathname === item.href ? "#9B0D15" : "#373A36",
+                    fontWeight: pathname === item.href ? 700 : 400,
+                  }}
                 >
                   {item.label}
                 </a>
               ) : (
                 <button
                   type="button"
-                  className={clsx(
-                    "w-full text-left",
-                    pathname === item.href ? "text-blue-500 font-bold" : "",
-                  )}
+                  className="w-full text-left"
+                  style={{
+                    color: pathname === item.href ? "#9B0D15" : "#373A36",
+                    fontWeight: pathname === item.href ? 700 : 400,
+                  }}
                   onClick={() => handleLinkClick(item.href)}
                 >
                   {item.label}
@@ -219,7 +266,10 @@ export const Navbar = () => {
           {/* Install App */}
           {showInstallButton && (
             <NavbarMenuItem
-              className="cursor-pointer text-green-600 font-medium"
+              className="cursor-pointer font-medium"
+              style={{
+                color: "#9B0D15",
+              }}
               onClick={() => {
                 handleInstallApp()
                 setMenuOpen(false)

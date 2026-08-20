@@ -12,15 +12,18 @@ import {
 } from "react-icons/lu"
 
 const FormUtilities = () => {
+  const buttonClass =
+    "border-white/60 text-white hover:bg-white hover:text-[#9B0D15] transition-colors"
+
   return (
     <div className="flex gap-2">
       {/* Customer Reservation Form - display only */}
       <Tooltip content="Customer Reservation Form">
         <Button
           size="md"
-          className="border-green-300 text-green-300"
+          className={buttonClass}
           radius="full"
-          variant="flat"
+          variant="bordered"
           isIconOnly
           aria-label="Customer Reservation Form"
         >
@@ -34,9 +37,9 @@ const FormUtilities = () => {
         <Tooltip content="Room Planner">
           <Button
             size="md"
-            className="border-green-300 text-green-300"
+            className={buttonClass}
             radius="full"
-            variant="flat"
+            variant="bordered"
             isIconOnly
             aria-label="Room Planner"
           >
@@ -51,9 +54,9 @@ const FormUtilities = () => {
         <Tooltip content="Set Appointment">
           <Button
             size="md"
-            className="border-green-300 text-green-300"
+            className={buttonClass}
             radius="full"
-            variant="flat"
+            variant="bordered"
             isIconOnly
             aria-label="Set Appointment"
           >
@@ -67,9 +70,9 @@ const FormUtilities = () => {
         <Tooltip content="Loan Calculator">
           <Button
             size="md"
-            className="border-green-300 text-green-300"
+            className={buttonClass}
             radius="full"
-            variant="flat"
+            variant="bordered"
             isIconOnly
             aria-label="Loan Calculator"
           >
@@ -83,9 +86,9 @@ const FormUtilities = () => {
         <Tooltip content="Apply Now">
           <Button
             size="md"
-            className="border-green-300 text-green-300"
+            className={buttonClass}
             radius="full"
-            variant="flat"
+            variant="bordered"
             isIconOnly
             aria-label="Apply Now"
           >
