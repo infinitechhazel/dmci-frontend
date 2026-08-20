@@ -117,7 +117,7 @@ const ComparePreview = () => {
                             {filteredProperties.map((property) => (
                                 <div
                                     key={property.id}
-                                    className="flex items-center bg-green-400 py-1 px-3 md:py-2 md:px-4 rounded-md text-sm md:text-base"
+                                    className="flex items-center bg-red-400 py-1 px-3 md:py-2 md:px-4 rounded-md text-sm md:text-base"
                                 >
                                     <span className="mr-2">{property.property.name}</span>
                                     <button
@@ -130,7 +130,7 @@ const ComparePreview = () => {
                             ))}
                         </div>
 
-                        <Button className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 bg-blue-800 text-white"
+                        <Button className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 bg-red-800 text-white"
                             isLoading={buttonLoading}
                             onPress={handleCompareClick}  
                         >

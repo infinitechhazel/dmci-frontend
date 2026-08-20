@@ -47,22 +47,22 @@ const getOrdinalSuffix = (num: string | number) => {
 const DetailSection: React.FC<DetailSectionProps> = ({ data }) => {
     const cardData = [
         {
-            icons: <LuTags className="text-2xl text-green-800" />,
+            icons: <LuTags className="text-2xl text-red-800" />,
             title: "Price",
             data: priceFormatted(data.property_price),
         },
         {
-            icons: <LuBed className="text-2xl text-green-800" />,
+            icons: <LuBed className="text-2xl text-red-800" />,
             title: "Unit/PS Type",
             data: data.property_type,
         },
         {
-            icons: <LuLandPlot className="text-2xl text-green-800" />,
+            icons: <LuLandPlot className="text-2xl text-red-800" />,
             title: "Unit Area",
             data: `${data.property_size} Sqm.`,
         },
         {
-            icons: <LuBuilding2 className="text-2xl text-green-800" />,
+            icons: <LuBuilding2 className="text-2xl text-red-800" />,
             title: "Floor Level",
             data: `${getOrdinalSuffix(data.property_level)} Floor`,
         },
@@ -76,7 +76,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({ data }) => {
                     <Card key={index}>
                         <CardBody className="px-6">
                             <div className="flex items-center gap-4">
-                                <div className="bg-green-300 rounded-full p-2">
+                                <div className="bg-red-300 rounded-full p-2">
                                     {item.icons}
                                 </div>
                                 <div>

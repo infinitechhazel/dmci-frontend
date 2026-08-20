@@ -39,13 +39,13 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
         {/* Email */}
         <div className="flex items-center gap-2 text-sm mb-2">
-          <div className="bg-blue-100 p-1 rounded-lg shrink-0">
-            <MdEmail className="text-blue-700" size={18} />
+          <div className="bg-red-100 p-1 rounded-lg shrink-0">
+            <MdEmail className="text-red-700" size={18} />
           </div>
           <span className="shrink-0">:</span>
           <div className="flex-1 min-w-0">
             <a
-              className="text-blue-200 hover:underline break-words"
+              className="text-red-200 hover:underline break-words"
               href={`mailto:${data.email}`}
             >
               {data.email}
@@ -55,12 +55,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
         {/* Phone */}
         <div className="flex items-center gap-2 text-sm mb-2">
-          <div className="bg-blue-100 py-1 px-1 rounded-lg">
-            <MdPhone className="text-blue-700" size={18} />
+          <div className="bg-red-100 py-1 px-1 rounded-lg">
+            <MdPhone className="text-red-700" size={18} />
           </div>
           <span>:</span>
           <a
-            className="text-blue-200 hover:underline"
+            className="text-red-200 hover:underline"
             href={`tel:+63${data.profile.phone}`}
           >
             (+63) {formatPhoneNumber(data.profile.phone)}
@@ -69,12 +69,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
         {/* Telegram */}
         <div className="flex items-center gap-2 text-sm mb-2">
-          <div className="bg-blue-100 py-1 px-1 rounded-lg">
-            <FaTelegram className="text-blue-700" size={18} />
+          <div className="bg-red-100 py-1 px-1 rounded-lg">
+            <FaTelegram className="text-red-700" size={18} />
           </div>
           <span>:</span>
           <a
-            className="text-blue-200 hover:underline"
+            className="text-red-200 hover:underline"
             href={`https://t.me/+63${data.profile.phone}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -85,12 +85,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
         {/* Viber */}
         <div className="flex items-center gap-2 text-sm mb-2">
-          <div className="bg-blue-100 py-1 px-1 rounded-lg">
-            <FaViber className="text-blue-700" size={18} />
+          <div className="bg-red-100 py-1 px-1 rounded-lg">
+            <FaViber className="text-red-700" size={18} />
           </div>
           <span>:</span>
           <a
-            className="text-blue-200 hover:underline"
+            className="text-red-200 hover:underline"
             href={`viber://chat?number=%2B63${data.profile.phone}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -101,12 +101,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
         {/* WhatsApp */}
         <div className="flex items-center gap-2 text-sm mb-2">
-          <div className="bg-blue-100 py-1 px-1 rounded-lg">
-            <FaWhatsapp className="text-blue-700" size={18} />
+          <div className="bg-red-100 py-1 px-1 rounded-lg">
+            <FaWhatsapp className="text-red-700" size={18} />
           </div>
           <span>:</span>
           <a
-            className="text-blue-200 hover:underline"
+            className="text-red-200 hover:underline"
             href={`https://wa.me/63${data.profile.phone}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -124,12 +124,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
         <ul className="space-y-2">
           {/* Facebook */}
           <li className="flex items-center gap-2 text-sm">
-            <div className="bg-blue-100 py-1 px-1 rounded-lg">
-              <MdFacebook className="text-blue-700" size={18} />
+            <div className="bg-red-100 py-1 px-1 rounded-lg">
+              <MdFacebook className="text-red-700" size={18} />
             </div>
             <span>:</span>
             <Link
-              className="text-blue-200 text-tiny break-words line-clamp-1 hover:underline"
+              className="text-red-200 text-tiny break-words line-clamp-1 hover:underline"
               href={data.profile.facebook}
               target="_blank"
             >
@@ -139,12 +139,12 @@ const AgentContactInfo: React.FC<AgentDataProps> = ({ data }) => {
 
           {/* Instagram */}
           <li className="flex items-center gap-2 text-sm">
-            <div className="bg-blue-100 py-1 px-1 rounded-lg">
-              <FaSquareInstagram className="text-blue-700" size={18} />
+            <div className="bg-red-100 py-1 px-1 rounded-lg">
+              <FaSquareInstagram className="text-red-700" size={18} />
             </div>
             <span>:</span>
             <Link
-              className="text-blue-200 text-tiny break-words line-clamp-1 hover:underline"
+              className="text-red-200 text-tiny break-words line-clamp-1 hover:underline"
               href={data.profile.instagram}
               target="_blank"
             >

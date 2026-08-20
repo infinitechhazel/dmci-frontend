@@ -36,17 +36,17 @@ const BuildingPlanSection: React.FC<MasterPlanSectionProps> = ({
 }) => {
   const cardData = [
     {
-      icons: <LuRuler className="text-xl text-green-800" />,
+      icons: <LuRuler className="text-xl text-red-800" />,
       title: "Property Area",
       data: formatArea(plan?.area),
     },
     {
-      icons: <LuConstruction className="text-xl text-green-800" />,
+      icons: <LuConstruction className="text-xl text-red-800" />,
       title: "Development Type",
       data: propertyPlanType,
     },
     {
-      icons: <LuBrush className="text-xl text-green-800" />,
+      icons: <LuBrush className="text-xl text-red-800" />,
       title: "Theme",
       data: plan?.theme,
     },
@@ -67,7 +67,7 @@ const BuildingPlanSection: React.FC<MasterPlanSectionProps> = ({
                 <Card key={index} className="shadow-none border">
                   <CardBody className="px-6">
                     <div className="flex items-center gap-2 overflow-hidden">
-                      <div className="bg-green-200 rounded-full p-2">
+                      <div className="bg-red-200 rounded-full p-2">
                         {item.icons}
                       </div>
                       <div>

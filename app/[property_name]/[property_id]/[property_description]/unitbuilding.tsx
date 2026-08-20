@@ -47,7 +47,7 @@ const BuildingSection: React.FC<BuildingSectionProps> = ({ data }) => {
 
                 <div className="py-2">
                   <h1 className="text-white text-xl font-bold uppercase">{build.name}</h1>
-                  <p className="text-tiny leading-3 text-green-400">
+                  <p className="text-tiny leading-3 text-red-400">
                     Mid Rise Condominiums
                   </p>
                 </div>
@@ -56,7 +56,7 @@ const BuildingSection: React.FC<BuildingSectionProps> = ({ data }) => {
                     {build.floors} {build.floors === 1 ? "Level" : "Levels"}
                   </h1>
 
-                  <p className="text-tiny leading-3 text-green-400">
+                  <p className="text-tiny leading-3 text-red-400">
                     Residential
                   </p>
                 </div>
@@ -64,7 +64,7 @@ const BuildingSection: React.FC<BuildingSectionProps> = ({ data }) => {
                   <h1 className="text-white text-xl font-bold">
                     {build.parking} {build.parking === 1 ? "Level" : "Levels"}
                   </h1>
-                  <p className="text-tiny leading-3 text-green-400">
+                  <p className="text-tiny leading-3 text-red-400">
                     Basement Parking
                   </p>
                 </div>

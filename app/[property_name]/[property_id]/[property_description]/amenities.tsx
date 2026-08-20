@@ -49,7 +49,7 @@ const UnitAmenities: React.FC<AmenitiesProps> = ({ data }) => {
                 key={index}
                 className="inline-flex items-center gap-2 bg-gray-200 p-2 rounded-lg dark:bg-gray-900"
               >
-                <SparklesIcon className="h-5 w-5 text-blue-500" />
+                <SparklesIcon className="h-5 w-5 text-red-500" />
                 <p>{item}</p>
               </div>
             ))}
@@ -74,7 +74,7 @@ const UnitAmenities: React.FC<AmenitiesProps> = ({ data }) => {
               key={index}
               className="inline-flex items-center gap-2 bg-gray-200 p-2 rounded-lg dark:bg-gray-900"
             >
-              {Icon && <Icon className="h-5 w-5 text-blue-500" />}
+              {Icon && <Icon className="h-5 w-5 text-red-500" />}
               <p>{item}</p>
             </div>
           );

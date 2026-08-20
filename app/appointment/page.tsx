@@ -74,7 +74,7 @@ export default function Appointment() {
   return (
     <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-start px-4 xl:px-24">
       {/* Profile Sidebar */}
-      <div className="w-full order-2 md:order-1 col-span-2 md:col-span-1 bg-blue-800 text-white rounded-lg px-6 py-8">
+      <div className="w-full order-2 md:order-1 col-span-2 md:col-span-1 bg-red-800 text-white rounded-lg px-6 py-8">
         <ProfileCard profile={profile} />
       </div>
 

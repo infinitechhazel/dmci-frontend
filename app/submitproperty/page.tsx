@@ -68,7 +68,7 @@ export default function BlogPage() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
       {/* Profile Sidebar */}
-      <div className="w-full col-span-2 md:col-span-1 bg-blue-800 text-white rounded-lg px-6 py-8 order-2 md:order-1">
+      <div className="w-full col-span-2 md:col-span-1 bg-red-800 text-white rounded-lg px-6 py-8 order-2 md:order-1">
         <ProfileCard profile={profile} />
       </div>
 

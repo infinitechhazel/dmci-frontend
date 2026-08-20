@@ -80,7 +80,7 @@ const FloatingIcons = () => {
               href={item.link}
               rel="noopener noreferrer"
               target="_blank"
-              className="bg-blue-700 p-3 rounded-full shadow-lg hover:bg-blue-800 transition"
+              className="bg-red-700 p-3 rounded-full shadow-lg hover:bg-red-800 transition"
             >
               {item.icon}
             </a>
@@ -93,7 +93,7 @@ const FloatingIcons = () => {
         <div className="fixed bottom-28 right-8 lg:hidden z-[999]">
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-blue-700 p-3 rounded-full shadow-lg"
+            className="bg-red-700 p-3 rounded-full shadow-lg"
           >
             <LuGlobe className="text-white w-6 h-6" />
           </button>
@@ -110,7 +110,7 @@ const FloatingIcons = () => {
                 href={item.link}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="bg-blue-700 p-3 rounded-full shadow-lg hover:bg-blue-800 transition"
+                className="bg-red-700 p-3 rounded-full shadow-lg hover:bg-red-800 transition"
               >
                 {item.icon}
               </a>
@@ -119,7 +119,7 @@ const FloatingIcons = () => {
 
           <button
             onClick={() => setIsOpen(false)}
-            className="bg-blue-700 p-3 rounded-full shadow-lg"
+            className="bg-red-700 p-3 rounded-full shadow-lg"
           >
             <LuX className="text-white w-6 h-6" />
           </button>

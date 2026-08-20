@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useEffect, useState } from "react"
 import CompanyInfo from "@/components/companycontactinfo"
 import ContactForm from "@/components/contactform"
@@ -11,7 +10,6 @@ async function fetchProperties() {
 
   try {
     const headers = getAuthHeaders()
-
     const res = await fetch(endpoint, {
       method: "GET",
       headers,
@@ -25,7 +23,6 @@ async function fetchProperties() {
 
       return []
     }
-
     const data = await res.json()
 
     return data.records
@@ -38,7 +35,6 @@ async function fetchProperties() {
 
 const ContactUs = () => {
   const [properties, setProperties] = useState<[]>([])
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchProperties()
@@ -50,39 +46,22 @@ const ContactUs = () => {
 
   return (
     <section className="px-4 py-6 sm:px-6 md:py-8 lg:px-8">
-      <div className="grid grid-cols-1 gap-8 pt-8 text-start lg:grid-cols-2 lg:items-start">
-        {/* Contact Form Section */}
+      <div className="grid grid-cols-1 text-start lg:grid-cols-2 pt-8 gap-8 lg:items-start">
         <div>
           <div className="mb-8">
-            <h1
-              className="
-                text-xl
-                font-bold
-                uppercase
-                text-[#373A36]
-                sm:text-2xl
-              "
-            >
+            <h1 className="font-bold text-xl sm:text-2xl uppercase">
               Contact Us
             </h1>
-
-            <p
-              className="
-                text-sm
-                text-[#373A36]/70
-              "
-            >
+            <p className="text-sm text-default-500">
               Leave us a message and we will get back to you as soon as
               possible.
             </p>
           </div>
-
           <div>
             <ContactForm data={properties} />
           </div>
         </div>
 
-        {/* Company Information */}
         <div className="px-0 lg:px-8">
           <CompanyInfo />
         </div>

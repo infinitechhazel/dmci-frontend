@@ -66,7 +66,7 @@ const UnitSection: React.FC<UnitSectionProps> = ({ data }) => {
                     <div
                       className={`text-tiny uppercase font-semibold px-2 py-1 rounded-md mb-2 inline-flex items-center gap-1 ${
                         unit.status === "Few Units Left"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-red-100 text-red-800"
                           : unit.status === "Not Available"
                           ? "bg-red-100 text-red-800"
                           : "bg-gray-100 text-gray-600"

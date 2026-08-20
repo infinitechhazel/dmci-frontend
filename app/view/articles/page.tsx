@@ -79,14 +79,14 @@ const SingleNews = () => {
           <img
             alt="News image"
             className="w-full h-[200px] md:h-[600px] object-cover object-center rounded-lg"
-            src={`https://infinitech-testing5.online/articles/${news.image}`}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/articles/${news.image}`}
             width={1400}
             height={600}
           />
 
           <div className="py-2">
             Read More: 
-            <Link className="text-blue-700" href= {news.url} target="_blank"> {news.url}</Link>
+            <Link className="text-red-700" href= {news.url} target="_blank"> {news.url}</Link>
           </div>
         </div>
 

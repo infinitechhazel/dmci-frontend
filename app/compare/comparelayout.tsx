@@ -151,7 +151,7 @@ const CompareLayout: React.FC<CompareLayoutProps> = ({ initialData }) => {
                 className="object-cover rounded-xl min-w-full min-h-32 md:h-48 aspect-w-16 aspect-h-9 hover:scale-105 transition-all"
                 src={
                   property.images
-                    ? `https://infinitech-testing5.online/properties/images/${JSON.parse(property.images)[0]}`
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/properties/images/${JSON.parse(property.images)[0]}`
                     : defaultImage
                 }
               />
@@ -331,7 +331,7 @@ const CompareLayout: React.FC<CompareLayoutProps> = ({ initialData }) => {
           <CardFooter className="w-full">
             <div className="flex w-full">
               <Button
-                className="bg-green-600 uppercase text-white w-full"
+                className="bg-red-600 uppercase text-white w-full"
                 isLoading={buttonLoading[property.id] || false}
                 onPress={() => handleViewProperty(property)}
               >

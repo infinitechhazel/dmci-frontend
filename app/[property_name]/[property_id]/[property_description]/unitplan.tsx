@@ -19,19 +19,19 @@ interface MasterPlanSectionProps {
 const MasterPlanSection: React.FC<MasterPlanSectionProps> = ({ data }) => {
     const cardData = [
         {
-            icons: <LuBuilding2 className="text-xl text-green-800" />,
+            icons: <LuBuilding2 className="text-xl text-red-800" />,
             title: "Building",
             data: data?.property_building,
         },
 
         {
-            icons: <LuScissors className="text-xl text-green-800" />,
+            icons: <LuScissors className="text-xl text-red-800" />,
             title: "Unit Cut",
             data: data?.property_plan_cut,
         },
 
         {
-            icons: <LuBadgeCheck className="text-xl text-green-800" />,
+            icons: <LuBadgeCheck className="text-xl text-red-800" />,
             title: "Unit Status",
             data: data?.property_plan_status,
         },
@@ -52,7 +52,7 @@ const MasterPlanSection: React.FC<MasterPlanSectionProps> = ({ data }) => {
                                 <Card key={index} className="shadow-none border">
                                     <CardBody className="px-6">
                                         <div className="flex items-center gap-2">
-                                            <div className="bg-green-200 rounded-full p-2">
+                                            <div className="bg-red-200 rounded-full p-2">
                                                 {item.icons}
                                             </div>
                                             <div>

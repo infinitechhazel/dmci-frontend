@@ -18,7 +18,7 @@ const CompanyInfo = () => {
 
 
       <div className="flex gap-3 pt-8">
-        <div className="bg-green-200 inline-flex">
+        <div className="bg-red-200 inline-flex">
           <MdPhone size={32} className="mt-2" />
         </div>
 

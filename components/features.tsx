@@ -70,7 +70,7 @@ export default function AppFeatures() {
         <DropdownTrigger>
           <Button
             aria-label="Open menu"
-            className="text-white text-md bg-green-700"
+            className="text-white text-md bg-red-700"
             endContent={<LuChevronDown size={16} />}
             variant="solid"
           >

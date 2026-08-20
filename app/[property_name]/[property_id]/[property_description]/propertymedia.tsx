@@ -175,13 +175,13 @@ const PropertyImage: React.FC<ListingsMediaProps> = ({ data }) => {
                         {/* Navigation Buttons */}
                         <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-4 z-10">
                             <button
-                                className="bg-blue-600 opacity-50 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition hover:opacity-100"
+                                className="bg-red-600 opacity-50 text-white py-2 px-4 rounded-full hover:bg-red-700 transition hover:opacity-100"
                                 onClick={handlePrev}
                             >
                                 &#8249; {/* Left arrow */}
                             </button>
                             <button
-                                className="bg-blue-600 opacity-50 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition hover:opacity-100"
+                                className="bg-red-600 opacity-50 text-white py-2 px-4 rounded-full hover:bg-red-700 transition hover:opacity-100"
                                 onClick={handleNext}
                             >
                                 &#8250; {/* Right arrow */}

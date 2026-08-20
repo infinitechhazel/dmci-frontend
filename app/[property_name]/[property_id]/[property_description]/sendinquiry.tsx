@@ -87,7 +87,7 @@ const SendInquiry: React.FC<InquiryFormProps> = ({ inquiry }) => {
     return (
         <div className="w-full p-6">
             <div className="flex items-center gap-2">
-                <div className="bg-green-200 p-2 rounded-full text-green-800">
+                <div className="bg-red-200 p-2 rounded-full text-red-800">
                     <LuMessageCircleQuestion size={48} />
                 </div>
                 <div>
@@ -158,7 +158,7 @@ const SendInquiry: React.FC<InquiryFormProps> = ({ inquiry }) => {
                                 <button
                                 type="button"
                                 onClick={onOpen}
-                                className="text-blue-500 underline hover:text-blue-700"
+                                className="text-red-500 underline hover:text-red-700"
                                 >
                                 terms and conditions.
                                 </button>

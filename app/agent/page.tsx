@@ -82,7 +82,7 @@ const AgentPage = () => {
   return (
     <div className="mx-auto flex-grow grid grid-cols-1 md:grid-cols-3 gap-6 items-start px-4 xl:px-24">
       {/* Profile Sidebar */}
-      <div className="w-full col-span-2 md:col-span-1 bg-blue-900 text-white rounded-lg px-6 py-8">
+      <div className="w-full col-span-2 md:col-span-1 bg-red-900 text-white rounded-lg px-6 py-8">
         <ProfileCard profile={profile} />
       </div>
 
